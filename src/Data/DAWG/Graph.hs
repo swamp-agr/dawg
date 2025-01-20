@@ -18,7 +18,7 @@ module Data.DAWG.Graph
 import Control.Applicative ((<$>), (<*>))
 import Data.Binary (Binary, put, get)
 import qualified Data.IntSet as S
-import qualified Data.IntMap as M
+import qualified Data.IntMap.Strict as M
 
 import Data.DAWG.HashMap (Hash)
 import qualified Data.DAWG.HashMap as H
@@ -110,7 +110,7 @@ remNode i Graph{..} =
 
 -- | Increment the number of ingoing paths.
 incIngo :: ID -> Graph n -> Graph n
-incIngo i g = g { ingoMap = M.insertWith' (+) i 1 (ingoMap g) }
+incIngo i g = g { ingoMap = M.insertWith (+) i 1 (ingoMap g) }
 
 -- | Decrement the number of ingoing paths and return
 -- the resulting number.
